@@ -31,7 +31,15 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- Code quality: identify the linting, formatting, static analysis, and review
+  gates that apply to this feature; document any justified exception in
+  Complexity Tracking.
+- Testing: list the automated test levels required for this change and the
+  commands or suites that will prove the behavior.
+- UX consistency: describe the existing patterns, components, content rules, and
+  accessibility expectations this feature must preserve or intentionally extend.
+- Performance: define explicit budgets or thresholds for the affected critical
+  path and the validation method that will be used to detect regressions.
 
 ## Project Structure
 
@@ -99,6 +107,6 @@ directories captured above]
 > **Fill ONLY if Constitution Check has violations that must be justified**
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
+| --------- | ---------- | ----------------------------------- |
 | [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
 | [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
