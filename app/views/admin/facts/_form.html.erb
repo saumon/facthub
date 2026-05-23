@@ -1,0 +1,21 @@
+<% if fact.errors.any? %>
+  <div class="mb-5 rounded-xl bg-red-50 border border-red-200 px-4 py-3">
+    <p class="text-sm font-semibold text-red-800 mb-1.5">
+      &#x26A0; <%= pluralize(fact.errors.count, "error") %> prevented this fact from being saved:
+    </p>
+    <ul class="list-disc list-inside text-sm text-red-700 space-y-0.5">
+      <% fact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="mb-6">
+  <%= form.label :body, class: "block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5" %>
+  <%= form.text_area :body, rows: 5,
+                     class: "w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 focus:bg-white focus:outline-none transition resize-none",
+                     placeholder: "Enter a fun fact (max 500 characters)" %>
+</div>
+
+<%= form.submit class: "rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 active:bg-indigo-800 cursor-pointer transition shadow-sm" %>
