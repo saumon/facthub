@@ -1,0 +1,72 @@
+openapi: "3.1.0"
+
+info:
+  title: FactHub API
+  description: Public REST API serving random fun facts.
+  version: "1.0.0"
+  contact:
+    name: FactHub
+
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+paths:
+  /api/facts/random:
+    get:
+      summary: Get a random fact
+      description: Returns a single fun fact chosen at random from the catalog. No authentication required.
+      operationId: getRandomFact
+      tags:
+        - Facts
+      responses:
+        "200":
+          description: A random fun fact.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fact"
+              example:
+                id: 42
+                body: "Honey never spoils. Archaeologists have found 3,000-year-old honey in Egyptian tombs that was still perfectly edible."
+        "404":
+          description: No facts are available in the catalog.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: "no_facts_available"
+                message: "No fun facts are currently available."
+
+components:
+  schemas:
+    Fact:
+      type: object
+      required:
+        - id
+        - body
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the fun fact.
+          example: 42
+        body:
+          type: string
+          description: The fun fact text. Always non-empty.
+          example: "Honey never spoils."
+
+    Error:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Machine-readable error code.
+          example: "no_facts_available"
+        message:
+          type: string
+          description: Human-readable error description.
+          example: "No fun facts are currently available."

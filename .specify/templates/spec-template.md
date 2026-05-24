@@ -74,6 +74,8 @@
 
 - What happens when [boundary condition]?
 - How does system handle [error scenario]?
+- How does the experience stay consistent with existing patterns during loading,
+  empty, error, and recovery states?
 
 ## Requirements *(mandatory)*
 
@@ -89,6 +91,11 @@
 - **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
 - **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
 - **FR-005**: System MUST [behavior, e.g., "log all security events"]
+- **FR-00X**: System MUST define the UX consistency constraints for affected user
+  journeys, including reuse of existing patterns or an explicit rationale for any
+  approved deviation.
+- **FR-00Y**: System MUST define measurable performance expectations for each
+  critical user journey or processing path changed by the feature.
 
 *Example of marking unclear requirements:*
 
@@ -113,6 +120,10 @@
 - **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
 - **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
 - **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- Include at least one outcome that verifies user-facing consistency or usability
+  when the feature changes an interactive flow.
+- Include at least one quantified performance outcome when the feature affects a
+  critical path.
 
 ## Assumptions
 

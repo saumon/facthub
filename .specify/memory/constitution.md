@@ -1,50 +1,101 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+Version change: template -> 1.0.0
+Modified principles:
+- Template Principle 1 -> I. Code Quality Is a Release Gate
+- Template Principle 2 -> II. Tests Prove Behavior
+- Template Principle 3 -> III. User Experience Stays Consistent
+- Template Principle 4 -> IV. Performance Budgets Are Explicit
+Added sections:
+- Delivery Standards
+- Review and Quality Gates
+Removed sections:
+- Template Principle 5
+Templates requiring updates:
+- ✅ updated .specify/templates/plan-template.md
+- ✅ updated .specify/templates/spec-template.md
+- ✅ updated .specify/templates/tasks-template.md
+Follow-up TODOs:
+- None
+-->
+
+# FactHub Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Code Quality Is a Release Gate
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+All production changes MUST be small enough to review, MUST preserve clear module
+boundaries, and MUST leave touched code more readable than before. Every change
+MUST pass repository formatting, linting, and static analysis checks before review
+approval. Temporary shortcuts, dead code, and undocumented branching logic MUST
+be removed or explicitly justified in the implementation plan.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+Rationale: maintainability degrades through unchecked local exceptions; reviewable,
+well-scoped changes keep the codebase understandable as FactHub grows.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### II. Tests Prove Behavior
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+Every feature change MUST define automated tests for its intended behavior before
+the implementation is considered complete. Bug fixes MUST include a regression test
+that fails without the fix. Plans and tasks MUST name the required test levels for
+the affected slice, with unit tests for local logic and integration or end-to-end
+tests for user-visible flows, contracts, or cross-boundary behavior.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Rationale: executable proof is the only reliable way to prevent regressions and to
+show that specifications and implementation still match.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### III. User Experience Stays Consistent
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+User-facing work MUST reuse established content patterns, interaction rules, visual
+tokens, and accessibility behaviors unless the specification explicitly approves a
+change to the product language. Each specification MUST describe the affected user
+journey, consistency constraints, and acceptance criteria for errors, empty states,
+and feedback states. Reviews MUST reject changes that introduce avoidable UX drift.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Rationale: consistency reduces user friction, shortens learning time, and keeps new
+features aligned with the product users believe they are already using.
+
+### IV. Performance Budgets Are Explicit
+
+Every feature specification and implementation plan MUST define measurable
+performance expectations for the critical path it changes, including latency,
+throughput, rendering responsiveness, resource usage, or build-time impact as
+appropriate. Implementations MUST include measurement or validation steps when a
+change can affect those budgets, and a change MUST NOT ship if it knowingly breaks
+an agreed budget without an approved exception.
+
+Rationale: performance regressions are product regressions; explicit budgets make
+trade-offs visible early enough to manage them.
+
+## Delivery Standards
+
+Specifications MUST include independently testable user stories, measurable success
+criteria, UX consistency expectations, and quantified performance targets for each
+critical journey. Implementation plans MUST translate those requirements into
+quality gates, validation commands, and explicit exceptions when a principle cannot
+be fully met. Task lists MUST include the work needed for automated tests, UX
+validation, and performance verification rather than treating them as optional
+polish.
+
+## Review and Quality Gates
+
+Before implementation begins, the Constitution Check in the plan MUST confirm how
+the work satisfies code quality, testing, UX consistency, and performance budget
+requirements. Before merge, reviewers MUST verify that required automated checks
+ran, user-facing acceptance criteria were covered, and any performance claims were
+measured with project-appropriate evidence. Unresolved exceptions MUST be tracked
+in the plan with owner, rationale, and expiration criteria.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution overrides conflicting local habits and template defaults. Changes
+to this constitution MUST be made in the same pull request as any dependent
+template or workflow updates they require. Semantic versioning applies to this
+document: MAJOR for incompatible governance changes or principle removal, MINOR for
+new principles or materially expanded obligations, and PATCH for clarifications
+that do not change enforcement. Compliance review is mandatory for every plan,
+specification, task list, and pull request that claims readiness for implementation
+or merge.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-05-23 | **Last Amended**: 2026-05-23
