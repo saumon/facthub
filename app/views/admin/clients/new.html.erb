@@ -1,0 +1,20 @@
+<div class="mb-8">
+  <h1 class="text-2xl font-bold text-white">New Eligible Client</h1>
+  <p class="text-sm text-indigo-300 mt-0.5">A unique client identifier will be generated automatically.</p>
+</div>
+
+<div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+  <p class="text-sm text-slate-600 mb-6">
+    Clicking <strong>Create Client</strong> will generate a new opaque client identifier that can be used
+    with <code class="text-indigo-700 bg-indigo-50 rounded px-1 py-0.5 text-xs">GET /api/facts/next?client_id=…</code>.
+  </p>
+
+  <%= button_to admin_clients_path,
+                method: :post,
+                class: "inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 active:bg-indigo-800 transition shadow-sm" do %>
+    <span class="text-base leading-none">&#43;</span> Create Client
+  <% end %>
+
+  <%= link_to "Cancel", admin_clients_path,
+              class: "ml-3 text-sm text-slate-500 hover:text-slate-700 transition" %>
+</div>

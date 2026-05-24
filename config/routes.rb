@@ -3,10 +3,16 @@ Rails.application.routes.draw do
 
   namespace :api do
     get "facts/random", to: "facts#random"
+    get "facts/next", to: "facts#next"
   end
 
   namespace :admin do
     resources :facts
+    resources :clients, only: %i[index show new create destroy] do
+      member do
+        post :reset
+      end
+    end
   end
 
   root "admin/facts#index"
