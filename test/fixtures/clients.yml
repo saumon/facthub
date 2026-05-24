@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+alice:
+  client_identifier: aabbccddeeff00112233445566778801
+  last_fact_id:
+
+bob:
+  client_identifier: aabbccddeeff00112233445566778802
+  last_fact_id: 1
