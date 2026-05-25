@@ -3,7 +3,14 @@
 alice:
   client_identifier: aabbccddeeff00112233445566778801
   last_fact_id:
+  alias:
 
 bob:
   client_identifier: aabbccddeeff00112233445566778802
   last_fact_id: 1
+  alias:
+
+carol:
+  client_identifier: aabbccddeeff00112233445566778803
+  last_fact_id:
+  alias: "Operations West"

@@ -15,8 +15,9 @@ A Ruby on Rails application that exposes a public JSON API serving random fun fa
 ## ✨ Features
 
 - 🌐 **Public REST API** — `GET /api/facts/random` returns a random fact as JSON, no authentication required
-- � **Sequential fact delivery** — `GET /api/facts/next?client_id=…` serves facts in ascending order for a registered client; each client has its own independent cursor that wraps around after the last fact
+- 📶 **Sequential fact delivery** — `GET /api/facts/next?client_id=…` serves facts in ascending order for a registered client; each client has its own independent cursor that wraps around after the last fact
 - 🪪 **Eligible client management** — Authenticated admins can create eligible clients, view and copy their generated identifiers, inspect current progression, reset progression, and delete clients
+- 🏷️ **Client aliases** — Admins can attach an optional human-readable alias to any client at creation time or later from the detail page; the alias is displayed alongside the generated identifier in the client list and detail view, with a consistent fallback when none is set
 - 🔒 **Admin UI** — Full CRUD interface for fun facts and client management, protected by Devise authentication
 - 📥 **Bulk markdown import** — Admins can upload one or more `.md` files from the **Setup** menu; each file is validated (max 10,000 lines, bullet-list format), deduplicated against existing facts, and processed in the background with a live progress bar
 - ⏱ **Session timeout** — Admin sessions automatically expire after 30 minutes of inactivity
@@ -221,6 +222,15 @@ Client.first.client_identifier
 ## 📋 Changelog
 
 ### v1.2.0 *(May 25, 2026)*
+
+#### Client alias management ([#005](specs/005-client-alias/spec.md))
+
+- 🏷️ **Optional alias on create** — The new-client form now includes an optional alias field; the alias is trimmed and stored alongside the generated identifier
+- ✏️ **Alias editing on detail page** — A dedicated inline form on the client detail page lets admins add, change, or clear the alias at any time without affecting the client identifier or fact progression
+- 📋 **Consistent alias display** — Both the client list and the detail page show the saved alias when present or the exact fallback text `No alias defined` when absent; the generated identifier is always visible regardless of alias state
+- 🔤 **Input normalization** — Leading and trailing whitespace is stripped before validation and persistence; whitespace-only input is treated as empty
+- 📏 **Length guard** — Aliases whose trimmed length exceeds 100 characters are rejected with an inline validation message and the submitted value is preserved in the form
+- 🔁 **Duplicate aliases allowed** — The same alias value can be assigned to multiple clients
 
 #### Admin facts pagination ([#004](specs/004-facts-pagination/spec.md))
 
