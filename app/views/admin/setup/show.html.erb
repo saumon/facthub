@@ -1,0 +1,86 @@
+<div class="mb-8">
+  <h1 class="text-2xl font-bold text-white">Setup</h1>
+  <p class="text-sm text-indigo-300 mt-0.5">Import markdown fact files in bulk</p>
+</div>
+
+<%# Upload form %>
+<div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6"
+     data-controller="import"
+     data-import-status-url-value="">
+  <h2 class="text-base font-semibold text-slate-700 mb-4">Import Facts from Markdown</h2>
+
+  <p class="text-sm text-slate-500 mb-4">
+    Select one or more <code class="bg-slate-100 px-1 rounded">.md</code> files.
+    Each file must contain only a title line (<code class="bg-slate-100 px-1 rounded"># …</code>)
+    and bullet lines (<code class="bg-slate-100 px-1 rounded">- Fact body</code>).
+    Empty lines are ignored. Maximum <strong>10,000 lines</strong> per file.
+    Duplicate facts are automatically skipped.
+  </p>
+
+  <%= form_with url: admin_setup_imports_path,
+                multipart: true,
+                html: { id: "import-form",
+                        "data-import-target": "form",
+                        "data-action": "submit->import#startImport" } do |f| %>
+    <div class="mb-4 flex items-center gap-3">
+      <label for="import_files_input"
+             class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-50
+                    text-indigo-700 text-sm font-semibold cursor-pointer
+                    hover:bg-indigo-100 transition border border-indigo-200">
+        Choose files
+      </label>
+      <span class="text-sm text-slate-500" data-import-target="fileLabel">No file chosen</span>
+      <%= f.file_field :files,
+                       id: "import_files_input",
+                       multiple: true,
+                       accept: ".md,text/markdown",
+                       class: "sr-only",
+                       "data-import-target": "fileInput",
+                       "data-action": "change->import#updateFileLabel" %>
+    </div>
+    <%= f.submit "Start Import",
+                 class: "inline-flex items-center rounded-xl bg-indigo-600 px-5 py-2.5
+                         text-sm font-semibold text-white hover:bg-indigo-700
+                         active:bg-indigo-800 transition shadow-sm cursor-pointer",
+                 "data-import-target": "submitButton" %>
+  <% end %>
+
+  <%# Progress region (hidden until import starts) %>
+  <div id="import-progress-region"
+       class="mt-6 hidden"
+       data-import-target="progressRegion"
+       role="region"
+       aria-live="polite"
+       aria-label="Import progress">
+
+    <div class="flex items-center justify-between mb-1">
+      <span class="text-sm font-medium text-slate-700"
+            data-import-target="statusText">Starting…</span>
+      <span class="text-sm text-slate-500"
+            data-import-target="percentText">0%</span>
+    </div>
+
+    <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden" role="progressbar"
+         aria-valuemin="0" aria-valuemax="100"
+         data-import-target="progressBar"
+         aria-valuenow="0">
+      <div class="bg-indigo-500 h-3 rounded-full transition-all duration-300"
+           data-import-target="progressFill"
+           style="width: 0%"></div>
+    </div>
+  </div>
+
+  <%# Terminal summary (rendered after import finishes) %>
+  <div id="import-summary-region"
+       class="mt-6 hidden"
+       data-import-target="summaryRegion">
+  </div>
+</div>
+
+<%# Last completed run summary if present and no active import %>
+<% if @last_run&.terminal? %>
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+    <h2 class="text-base font-semibold text-slate-700 mb-4">Last Import</h2>
+    <%= render "admin/setup/run_summary", run: @last_run %>
+  </div>
+<% end %>

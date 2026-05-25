@@ -13,6 +13,9 @@ Rails.application.routes.draw do
         post :reset
       end
     end
+    get  "setup",             to: "setup#show",           as: :setup
+    post "setup/imports",     to: "setup#create_import",  as: :setup_imports
+    get  "setup/imports/:id", to: "setup#import_status",  as: :setup_import
   end
 
   root "admin/facts#index"
