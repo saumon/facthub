@@ -124,4 +124,3 @@ class ClientsManagementTest < ApplicationSystemTestCase
     assert_current_path admin_clients_path
   end
 end
-

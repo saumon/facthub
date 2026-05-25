@@ -1,8 +1,95 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# 23 facts across 3 pages (10 + 10 + 3) with sequential timestamps for deterministic ordering.
 
 one:
   body: An interesting fact about the world.
+  created_at: 2024-01-01 00:00:01
 
 two:
   body: Another unique and fascinating fact.
+  created_at: 2024-01-01 00:00:02
+
+fact_03:
+  body: The human brain can process images in as little as 13 milliseconds.
+  created_at: 2024-01-01 00:00:03
+
+fact_04:
+  body: Honey never spoils and has been found in ancient Egyptian tombs.
+  created_at: 2024-01-01 00:00:04
+
+fact_05:
+  body: Octopuses have three hearts and blue blood.
+  created_at: 2024-01-01 00:00:05
+
+fact_06:
+  body: A group of flamingos is called a flamboyance.
+  created_at: 2024-01-01 00:00:06
+
+fact_07:
+  body: Crows can recognize and remember human faces.
+  created_at: 2024-01-01 00:00:07
+
+fact_08:
+  body: The Eiffel Tower grows taller in summer due to thermal expansion.
+  created_at: 2024-01-01 00:00:08
+
+fact_09:
+  body: Bananas are technically berries while strawberries are not.
+  created_at: 2024-01-01 00:00:09
+
+fact_10:
+  body: A day on Venus is longer than a year on Venus.
+  created_at: 2024-01-01 00:00:10
+
+fact_11:
+  body: The Great Wall of China is not visible from space with the naked eye.
+  created_at: 2024-01-01 00:00:11
+
+fact_12:
+  body: Water can boil and freeze at the same time under specific pressure conditions.
+  created_at: 2024-01-01 00:00:12
+
+fact_13:
+  body: The fingerprints of a koala are nearly identical to human fingerprints.
+  created_at: 2024-01-01 00:00:13
+
+fact_14:
+  body: Sea otters hold hands while sleeping to avoid drifting apart.
+  created_at: 2024-01-01 00:00:14
+
+fact_15:
+  body: Sharks are older than trees as a species on Earth.
+  created_at: 2024-01-01 00:00:15
+
+fact_16:
+  body: The average person walks the equivalent of five times around the world in a lifetime.
+  created_at: 2024-01-01 00:00:16
+
+fact_17:
+  body: A bolt of lightning contains enough energy to toast bread one hundred thousand times.
+  created_at: 2024-01-01 00:00:17
+
+fact_18:
+  body: Wombat droppings are cube-shaped to prevent them from rolling away.
+  created_at: 2024-01-01 00:00:18
+
+fact_19:
+  body: A snail can sleep for three years without waking up.
+  created_at: 2024-01-01 00:00:19
+
+fact_20:
+  body: The world population of ants outweighs the world population of humans.
+  created_at: 2024-01-01 00:00:20
+
+fact_21:
+  body: Cleopatra lived closer in time to the moon landing than to the Great Pyramid.
+  created_at: 2024-01-01 00:00:21
+
+fact_22:
+  body: Oxford University is older than the Aztec Empire.
+  created_at: 2024-01-01 00:00:22
+
+fact_23:
+  body: The inventor of the Frisbee was cremated and turned into a Frisbee after his death.
+  created_at: 2024-01-01 00:00:23
 
