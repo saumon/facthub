@@ -14,6 +14,7 @@
     <table class="w-full border-collapse">
       <thead>
         <tr class="bg-slate-50 border-b border-slate-200">
+          <th class="px-5 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider whitespace-nowrap">ID</th>
           <th class="px-5 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider w-full">Body</th>
           <th class="px-5 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider whitespace-nowrap">Actions</th>
         </tr>
@@ -21,6 +22,7 @@
       <tbody class="divide-y divide-slate-100">
         <% @facts.each do |fact| %>
           <tr class="hover:bg-indigo-50/40 transition">
+            <td class="px-5 py-4 text-sm font-mono text-slate-400"><%= fact.id %></td>
             <td class="px-5 py-4 text-sm text-slate-800 leading-relaxed"><%= fact.body %></td>
             <td class="px-5 py-4 whitespace-nowrap">
               <div class="flex items-center gap-2">

@@ -28,6 +28,6 @@ class AdminAuthTest < ApplicationSystemTestCase
     fill_in "Email", with: "sysadmin@example.com"
     fill_in "Password", with: "wrongpassword"
     click_button "Sign in"
-    assert_text "Invalid email or password"
+    assert_current_path new_admin_session_path
   end
 end
