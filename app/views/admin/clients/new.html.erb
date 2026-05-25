@@ -9,12 +9,23 @@
     with <code class="text-indigo-700 bg-indigo-50 rounded px-1 py-0.5 text-xs">GET /api/facts/next?client_id=…</code>.
   </p>
 
-  <%= button_to admin_clients_path,
-                method: :post,
-                class: "inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 active:bg-indigo-800 transition shadow-sm" do %>
-    <span class="text-base leading-none">&#43;</span> Create Client
-  <% end %>
+  <%= form_with model: @client, url: admin_clients_path, method: :post do |f| %>
+    <div class="mb-4">
+      <%= f.label :alias, "Alias (optional)", class: "block text-sm font-medium text-slate-700 mb-1.5" %>
+      <%= f.text_field :alias,
+            placeholder: "e.g. Operations West",
+            class: "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none" %>
+      <p class="mt-1 text-xs text-slate-400">Max 100 characters. Used for identification in management views only.</p>
+      <% if @client.errors[:alias].any? %>
+        <p class="mt-1 text-xs text-red-600"><%= @client.errors[:alias].first %></p>
+      <% end %>
+    </div>
 
-  <%= link_to "Cancel", admin_clients_path,
-              class: "ml-3 text-sm text-slate-500 hover:text-slate-700 transition" %>
+    <div class="flex items-center gap-3 mt-6">
+      <%= f.submit "Create Client",
+            class: "inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 active:bg-indigo-800 transition shadow-sm" %>
+      <%= link_to "Cancel", admin_clients_path,
+            class: "text-sm text-slate-500 hover:text-slate-700 transition" %>
+    </div>
+  <% end %>
 </div>

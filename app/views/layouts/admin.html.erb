@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Fact Hub — Admin</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -12,15 +12,17 @@
   <body class="min-h-screen bg-gradient-to-br from-indigo-950 via-indigo-900 to-slate-900">
     <header class="bg-slate-900 shadow">
       <nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-        <div class="flex items-center gap-2.5">
+        <%= link_to root_path, class: "flex items-center gap-2.5 hover:opacity-80 transition" do %>
           <span class="text-lg">&#x2728;</span>
           <span class="text-base font-bold text-white tracking-tight">Fact Hub <span class="text-indigo-400">Admin</span></span>
-        </div>
+        <% end %>
         <% if admin_signed_in? %>
           <div class="flex items-center gap-3">
             <%= link_to "Facts", admin_facts_path,
                         class: "text-xs font-medium text-slate-400 hover:text-white transition" %>
             <%= link_to "Clients", admin_clients_path,
+                        class: "text-xs font-medium text-slate-400 hover:text-white transition" %>
+            <%= link_to "Setup", admin_setup_path,
                         class: "text-xs font-medium text-slate-400 hover:text-white transition" %>
             <%= link_to "Sign out", destroy_admin_session_path, data: { turbo_method: :delete },
                         class: "text-xs font-medium text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-lg px-3 py-1.5 transition" %>

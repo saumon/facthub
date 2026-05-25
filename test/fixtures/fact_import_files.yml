@@ -1,0 +1,8 @@
+one:
+  fact_import_run: completed
+  filename: facts_import_valid.md
+  status: completed
+  total_lines: 3
+  processed_lines: 3
+  added_facts_count: 3
+  ignored_duplicates_count: 0
