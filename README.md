@@ -216,6 +216,7 @@ Client.first.client_identifier
 - 🗑 **Client lifecycle** — Admins can delete clients from the management interface; deleted client identifiers are immediately rejected by the API
 - 🔒 **Auth guard** — All client management actions remain behind Devise authentication; no unauthenticated access to client data
 - ⚡ **Concurrency safe** — Per-client cursor updates use `with_lock` to prevent duplicate fact delivery under concurrent same-client requests
+- ⚙️ **Chore** — Dependencies update
 
 ### v1.0.0 *(May 23, 2026)* — Initial release ([#001](specs/001-fact-hub-api-admin/spec.md))
 
