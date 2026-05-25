@@ -18,6 +18,7 @@ A Ruby on Rails application that exposes a public JSON API serving random fun fa
 - � **Sequential fact delivery** — `GET /api/facts/next?client_id=…` serves facts in ascending order for a registered client; each client has its own independent cursor that wraps around after the last fact
 - 🪪 **Eligible client management** — Authenticated admins can create eligible clients, view and copy their generated identifiers, inspect current progression, reset progression, and delete clients
 - 🔒 **Admin UI** — Full CRUD interface for fun facts and client management, protected by Devise authentication
+- 📥 **Bulk markdown import** — Admins can upload one or more `.md` files from the **Setup** menu; each file is validated (max 10,000 lines, bullet-list format), deduplicated against existing facts, and processed in the background with a live progress bar
 - ⏱ **Session timeout** — Admin sessions automatically expire after 30 minutes of inactivity
 - 🎨 **Modern UI** — Dark indigo gradient theme built with TailwindCSS v4.3 and Stimulus
 - 🔔 **Toast notifications** — Auto-dismissing flash messages with smooth transitions
@@ -39,12 +40,11 @@ A Ruby on Rails application that exposes a public JSON API serving random fun fa
 git clone https://github.com/your-username/facthub.git
 cd facthub
 
-# Install dependencies
-bundle install
-
-# Setup database (create, migrate, seed)
-bin/rails db:setup
+# Install dependencies + full database setup (primary + queue + cache + cable)
+bin/setup
 ```
+
+> `bin/setup` is the recommended one-shot command. It installs gems and prepares the database.
 
 ### Running the app
 
@@ -185,11 +185,23 @@ bundle exec rubocop -A     # Auto-fix
 ### Database commands
 
 ```bash
-bin/rails db:create        # Create database
-bin/rails db:migrate       # Run migrations
-bin/rails db:seed          # Seed demo data
-bin/rails db:reset         # Drop + create + migrate + seed
+bin/rails db:prepare                  # Create + migrate all databases
+bin/rails db:schema:load:queue        # (Re)load Solid Queue schema into queue DB
+bin/rails db:schema:load:cache        # (Re)load Solid Cache schema into cache DB
+bin/rails db:schema:load:cable        # (Re)load Solid Cable schema into cable DB
+bin/rails db:migrate                  # Run pending migrations (primary DB)
+bin/rails db:seed                     # Seed demo data
+bin/rails db:reset                    # Drop + recreate + migrate primary DB
 ```
+
+> The app uses four SQLite databases in `storage/`:
+>
+> - `development.sqlite3` (primary)
+> - `development_queue.sqlite3` (Solid Queue)
+> - `development_cache.sqlite3` (Solid Cache)
+> - `development_cable.sqlite3` (Action Cable)
+>
+> The `bin/setup` script prepares the primary database. Solid Queue tables are included via the standard migrations.
 
 ### Console
 
@@ -207,6 +219,16 @@ Client.first.client_identifier
 ---
 
 ## 📋 Changelog
+
+### v1.2.0 *(May 25, 2026)* — Admin bulk markdown import ([#003](specs/003-admin-fact-import/spec.md))
+
+- 📥 **Setup menu** — New **Setup** nav item in the admin interface for bulk fact import
+- 📝 **Markdown format** — Upload `.md` files where every fact is a bullet line (`- Fact body`); title lines (`#`) and blank lines are ignored; any other line format causes the whole file to be rejected
+- 📏 **10 000-line limit** — Files exceeding 10,000 lines are rejected entirely before any parsing begins
+- 🔁 **Deduplication** — Duplicate facts within the same batch and against already-stored facts are silently counted as "ignored" rather than inserted
+- ⏳ **Live progress bar** — A Stimulus controller polls the server every second and renders a progress bar and per-file status table while the background job runs
+- ✅ **Import summary** — After completion, a summary card shows total added, ignored, and rejected counts plus a per-file breakdown with validation errors
+- 🚀 **Production server update script** — Added `script/update_production_server.sh`, an automated update script that prevents concurrent runs with a lock, stops the Puma service, updates the `master` branch in fast-forward-only mode, installs dependencies, precompiles assets, runs migrations, restarts the service, and attempts an automatic restart on failure.
 
 ### v1.1.0 *(May 24, 2026)* — Sequential fact delivery by eligible client ([#002](specs/002-next-fact-client/spec.md))
 

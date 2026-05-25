@@ -1,0 +1,23 @@
+one:
+  admin: one
+  status: pending
+  total_files: 0
+  processed_files: 0
+  total_lines: 0
+  processed_lines: 0
+  added_facts_count: 0
+  ignored_duplicates_count: 0
+  invalid_files_count: 0
+
+completed:
+  admin: one
+  status: completed
+  total_files: 1
+  processed_files: 1
+  total_lines: 3
+  processed_lines: 3
+  added_facts_count: 3
+  ignored_duplicates_count: 0
+  invalid_files_count: 0
+  started_at: 2026-05-25 10:00:00
+  completed_at: 2026-05-25 10:00:05
