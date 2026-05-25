@@ -220,7 +220,18 @@ Client.first.client_identifier
 
 ## 📋 Changelog
 
-### v1.2.0 *(May 25, 2026)* — Admin bulk markdown import ([#003](specs/003-admin-fact-import/spec.md))
+### v1.2.0 *(May 25, 2026)*
+
+#### Admin facts pagination ([#004](specs/004-facts-pagination/spec.md))
+
+- 📄 **Paginated facts index** — The admin facts listing shows at most 10 facts per page; total fact count and current page position are always visible
+- ⬅️➡️ **Previous and next navigation** — Previous and next page controls appear only when the corresponding page exists; they are shown as inactive on boundary pages
+- ⏮⏭ **First and last navigation** — Direct jump to the first or last page is available whenever more than one page exists
+- 🔄 **Invalid page redirect** — Requests for page 0, negative pages, or pages beyond the last redirect to the nearest valid page rather than showing a broken state
+- 💾 **CRUD page context** — Create and edit flows return to the same page when it is still valid; delete flows fall back to the nearest valid page if the deletion collapses the current page
+- 📏 **Page-aware row actions** — Edit and delete links on each row preserve the current page so row-level operations keep the administrator's position in the list
+
+#### Admin bulk markdown import ([#003](specs/003-admin-fact-import/spec.md))
 
 - 📥 **Setup menu** — New **Setup** nav item in the admin interface for bulk fact import
 - 📝 **Markdown format** — Upload `.md` files where every fact is a bullet line (`- Fact body`); title lines (`#`) and blank lines are ignored; any other line format causes the whole file to be rejected

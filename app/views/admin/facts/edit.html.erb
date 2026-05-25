@@ -1,5 +1,5 @@
 <div class="mb-6">
-  <%= link_to admin_facts_path, class: "inline-flex items-center gap-1 text-sm text-indigo-300 hover:text-white transition" do %>
+  <%= link_to admin_facts_path(page: @current_page), class: "inline-flex items-center gap-1 text-sm text-indigo-300 hover:text-white transition" do %>
     &#8592; Back to Facts
   <% end %>
 </div>
@@ -8,6 +8,7 @@
 
 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
   <%= form_with model: [:admin, @fact] do |form| %>
+    <%= hidden_field_tag :page, @current_page %>
     <%= render "form", fact: @fact, form: form %>
   <% end %>
 </div>
