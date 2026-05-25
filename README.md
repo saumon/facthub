@@ -221,6 +221,10 @@ Client.first.client_identifier
 
 ## 📋 Changelog
 
+### v1.2.1 *(May 25, 2026)*
+
+- 🔧 **Bundler checksum** — Added the `bundler (4.0.12)` checksum entry to `Gemfile.lock` to eliminate the spurious diff that appeared on the production server after each deploy
+
 ### v1.2.0 *(May 25, 2026)*
 
 #### Client alias management ([#005](specs/005-client-alias/spec.md))
