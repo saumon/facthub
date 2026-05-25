@@ -52,4 +52,72 @@ class ClientTest < ActiveSupport::TestCase
     client.destroy
     assert_nil Client.find_by(client_identifier: identifier)
   end
+
+  # ---------------------------------------------------------------------------
+  # Alias normalization
+  # ---------------------------------------------------------------------------
+
+  test "alias is trimmed before validation and persistence" do
+    client = Client.new(alias: "  Hello  ")
+    client.valid?
+    assert_equal "Hello", client.alias
+  end
+
+  test "whitespace-only alias is treated as empty and stored as nil" do
+    client = Client.new(alias: "   ")
+    client.valid?
+    assert_nil client.alias
+  end
+
+  test "blank alias is stored as nil" do
+    client = Client.new(alias: "")
+    client.valid?
+    assert_nil client.alias
+  end
+
+  test "nil alias remains nil" do
+    client = Client.new
+    client.valid?
+    assert_nil client.alias
+  end
+
+  test "internal whitespace is preserved" do
+    client = Client.new(alias: "  Operations West  ")
+    client.valid?
+    assert_equal "Operations West", client.alias
+  end
+
+  # ---------------------------------------------------------------------------
+  # Alias validation
+  # ---------------------------------------------------------------------------
+
+  test "alias trimmed length of exactly 100 characters is valid" do
+    client = Client.new(alias: "a" * 100)
+    assert client.valid?
+  end
+
+  test "alias trimmed length over 100 characters is invalid" do
+    client = Client.new(alias: "a" * 101)
+    assert_not client.valid?
+    assert_includes client.errors[:alias], "is too long (maximum is 100 characters)"
+  end
+
+  test "duplicate aliases across clients are allowed" do
+    Client.create!(alias: "Shared Alias")
+    c2 = Client.new(alias: "Shared Alias")
+    assert c2.valid?
+  end
+
+  # ---------------------------------------------------------------------------
+  # Alias and reset_progression!
+  # ---------------------------------------------------------------------------
+
+  test "reset_progression! does not affect alias" do
+    client = Client.create!(alias: "Team Alpha")
+    client.update!(last_fact_id: 42)
+    client.reset_progression!
+    client.reload
+    assert_equal "Team Alpha", client.alias
+    assert_nil client.last_fact_id
+  end
 end

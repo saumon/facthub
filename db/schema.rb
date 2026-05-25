@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_25_000002) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_25_000003) do
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
@@ -24,6 +24,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_25_000002) do
   end
 
   create_table "clients", force: :cascade do |t|
+    t.string "alias"
     t.string "client_identifier", null: false
     t.datetime "created_at", null: false
     t.integer "last_fact_id"

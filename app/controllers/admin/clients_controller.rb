@@ -1,5 +1,5 @@
 class Admin::ClientsController < Admin::BaseController
-  before_action :set_client, only: %i[show reset destroy]
+  before_action :set_client, only: %i[show reset destroy update]
 
   def index
     @clients = Client.order(:created_at)
@@ -22,11 +22,27 @@ class Admin::ClientsController < Admin::BaseController
   end
 
   def create
-    @client = Client.new
+    @client = Client.new(client_params)
     if @client.save
       redirect_to admin_client_path(@client), notice: "Client was successfully created."
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @client.update(client_params)
+      redirect_to admin_client_path(@client), notice: "Alias was successfully updated."
+    else
+      @facts_count = Fact.count
+      @last_fact = Fact.find_by(id: @client.last_fact_id) if @client.last_fact_id.present?
+      @next_fact =
+        if @client.last_fact_id.present?
+          Fact.where("id > ?", @client.last_fact_id).order(:id).first || Fact.order(:id).first
+        else
+          Fact.order(:id).first
+        end
+      render :show, status: :unprocessable_entity
     end
   end
 
@@ -44,5 +60,9 @@ class Admin::ClientsController < Admin::BaseController
 
   def set_client
     @client = Client.find(params[:id])
+  end
+
+  def client_params
+    params.require(:client).permit(:alias)
   end
 end
