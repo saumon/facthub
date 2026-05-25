@@ -3,6 +3,7 @@
 set -Eeuo pipefail
 
 SERVICE_NAME="puma-facthub"
+WORKER_SERVICE_NAME="solid-queue-facthub"
 RAILS_ENVIRONMENT="production"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
@@ -23,14 +24,16 @@ cleanup() {
 	if [[ ${exit_code} -ne 0 ]]; then
 		echo "Error detected (code ${exit_code})."
 		if [[ "${service_stopped}" == "true" ]]; then
-			echo "Attempting to restart ${SERVICE_NAME}..."
+			echo "Attempting to restart ${SERVICE_NAME} and ${WORKER_SERVICE_NAME}..."
 			sudo systemctl start "${SERVICE_NAME}" || true
+			sudo systemctl start "${WORKER_SERVICE_NAME}" || true
 		fi
 	fi
 }
 trap cleanup EXIT
 
-echo "[1/6] Stopping service ${SERVICE_NAME}..."
+echo "[1/6] Stopping service ${SERVICE_NAME} and ${WORKER_SERVICE_NAME}..."
+sudo systemctl stop "${WORKER_SERVICE_NAME}"
 sudo systemctl stop "${SERVICE_NAME}"
 service_stopped=true
 
@@ -48,11 +51,13 @@ RAILS_ENV="${RAILS_ENVIRONMENT}" bundle exec rails assets:precompile
 echo "[5/6] Running migrations in ${RAILS_ENVIRONMENT}..."
 RAILS_ENV="${RAILS_ENVIRONMENT}" bin/rails db:migrate
 
-echo "[6/6] Starting service ${SERVICE_NAME}..."
+echo "[6/6] Starting service ${SERVICE_NAME} and ${WORKER_SERVICE_NAME}..."
 sudo systemctl start "${SERVICE_NAME}"
+sudo systemctl start "${WORKER_SERVICE_NAME}"
 service_stopped=false
 
 echo "Checking service status..."
 sudo systemctl is-active --quiet "${SERVICE_NAME}"
+sudo systemctl is-active --quiet "${WORKER_SERVICE_NAME}"
 
 echo "Update completed ✅"
