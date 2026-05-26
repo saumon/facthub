@@ -1,6 +1,6 @@
 # facthub Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-05-25
+Auto-generated from all feature plans. Last updated: 2026-05-26
 
 ## Active Technologies
 - Ruby on Rails 8.1.3 (Ruby >= 3.2) + Devise 4.x (`database_authenticatable`, `timeoutable`), tailwindcss-rails (TailwindCSS v4.3), sqlite3 (002-next-fact-client)
@@ -9,6 +9,7 @@ Auto-generated from all feature plans. Last updated: 2026-05-25
 - SQLite 3 for application data, uploaded files handled through multipart requests, persisted import status in application database (003-admin-fact-import)
 - SQLite 3 application database with existing facts table; no new persisted entities expected (004-facts-pagination)
 - SQLite 3 application database with the existing `clients` table extended by one nullable alias column (005-client-alias)
+- HTML5, CSS3, and optional vanilla JavaScript (ES2020-compatible) + No runtime framework; existing repository test stack for verification; browser DevTools/Lighthouse for manual validation (006-marketing-landing-page)
 
 - Ruby on Rails 8.1.3 (Ruby ≥ 3.2) + Devise 4.x (`database_authenticatable`, `timeoutable`), tailwindcss-rails (TailwindCSS v4.3), sqlite3 (001-fact-hub-api-admin)
 
@@ -44,9 +45,9 @@ bundle exec rubocop                   # Linting
 Ruby on Rails 8.1.3 (Ruby ≥ 3.2): Follow standard Rails conventions. Thin controllers, model-level validations, no inline SQL. Use `before_action :authenticate_admin!` in `Admin::BaseController`. API controllers inherit from `ApplicationController` with `respond_to :json`.
 
 ## Recent Changes
+- 006-marketing-landing-page: Added HTML5, CSS3, and optional vanilla JavaScript (ES2020-compatible) + No runtime framework; existing repository test stack for verification; browser DevTools/Lighthouse for manual validation
 - 005-client-alias: Added Ruby 3.2+ on Ruby on Rails 8.1.3 + Rails 8.1.3, Devise 4.x, Turbo, Stimulus, tailwindcss-rails v4.3
 - 004-facts-pagination: Added Ruby 3.2+ on Ruby on Rails 8.1.3 + Rails 8.1.3, Devise 4.x, Turbo, Stimulus, tailwindcss-rails v4.3
-- 003-admin-fact-import: Added Ruby 3.2+ on Ruby on Rails 8.1.3 + Rails 8.1.3, Devise 4.x, Turbo, Stimulus, tailwindcss-rails v4.3, Solid Queue
 
 
 <!-- MANUAL ADDITIONS START -->

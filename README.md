@@ -1,5 +1,9 @@
 # ✨ FactHub
 
+![FactHub Logo](docs/assets/images/logo-h.png)
+
+## Curated Fact Management & Controlled Delivery
+
 A Ruby on Rails application that exposes a public JSON API serving random fun facts and provides a password-protected admin interface for managing them.
 
 ![Ruby](https://img.shields.io/badge/Ruby-3.2+-red?logo=ruby)
@@ -9,6 +13,8 @@ A Ruby on Rails application that exposes a public JSON API serving random fun fa
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 [Features](#-features) • [Quick Start](#-quick-start) • [API](#-api) • [Development](#-development) • [Changelog](#-changelog) • [License](#-license)
+
+🌍 **Landing Page**: [https://saumon.github.io/facthub/](https://saumon.github.io/facthub/) — Static marketing page published from `docs/index.html`
 
 ---
 
@@ -220,6 +226,17 @@ Client.first.client_identifier
 ---
 
 ## 📋 Changelog
+
+### v1.3.0 *(May 26, 2026)*
+
+#### Static marketing landing page ([#006](specs/006-marketing-landing-page/spec.md))
+
+- 🌍 **GitHub Pages landing page** — Static marketing page published from `docs/index.html` at [https://saumon.github.io/facthub/](https://saumon.github.io/facthub/), fully functional without a running server
+- 🎯 **Product narrative** — Hero section, feature highlights, and benefits copy targeting content managers and product owners who curate fact collections
+- 📱 **Responsive design** — Mobile-first layout with fluid grid, breakpoints for laptop and smartphone viewports, and a progressive-enhancement mobile menu toggle
+- 🎨 **Admin-inspired theme** — Dark indigo gradient, rounded cards, indigo buttons, and white headings matching the administration interface visual language
+- 🔗 **Primary CTA** — Call to action linking directly to the public GitHub repository
+- ✅ **Automated smoke tests** — 29 integration tests covering contract, content, responsive, and theme assertions for the static page
 
 ### v1.2.1 *(May 25, 2026)*
 
