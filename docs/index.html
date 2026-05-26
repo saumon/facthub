@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fact Hub helps content managers and product owners manage curated fact collections and control how facts are delivered to their audience.">
+  <title>Fact Hub — Curated Fact Management & Controlled Delivery</title>
+  <link rel="icon" href="./assets/images/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <header id="header">
+    <nav class="nav-container">
+      <a href="#hero" class="logo"><img src="./assets/images/logo.svg" alt="Fact Hub" class="logo-icon" width="28" height="28"> Fact Hub</a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#cta" class="nav-cta">Get Started</a></li>
+      </ul>
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-glow"></div>
+    <div class="container">
+      <img src="./assets/images/logo.svg" alt="" class="hero-logo" width="80" height="80">
+      <span class="hero-badge">Open Source Fact Engine</span>
+      <h1 class="gradient-text">Curated Fact Management &amp; Controlled Delivery</h1>
+      <p class="hero-subtitle">Fact Hub helps content managers and product owners manage curated fact collections and control exactly how facts are delivered to their audience.</p>
+      <div class="hero-actions">
+        <a href="https://github.com/saumon/facthub" class="btn btn-primary btn-glow">View on GitHub</a>
+        <a href="#features" class="btn btn-outline">Explore Features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2 class="section-title">Core Features</h2>
+      <p class="section-subtitle">Everything you need to manage and deliver curated facts at scale.</p>
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon">📚</div>
+          <h3>Curated Fact Management</h3>
+          <p>Create, organize, and maintain your fact collections through an intuitive admin interface. Import facts in bulk from markdown files with automatic deduplication.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">🎯</div>
+          <h3>Controlled Fact Delivery</h3>
+          <p>Deliver facts sequentially to registered clients via a public REST API. Each client maintains its own independent progression through your fact collection.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">📊</div>
+          <h3>Client Progression Tracking</h3>
+          <p>Monitor which facts each client has received, reset progression when needed, and assign human-readable aliases for easy identification.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">⚡</div>
+          <h3>Public REST API</h3>
+          <p>Serve random or sequential facts via a clean JSON API. No authentication required for consumers — just register a client and start delivering.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">📥</div>
+          <h3>Bulk Markdown Import</h3>
+          <p>Upload markdown files containing facts in bullet-list format. Automatic validation, deduplication, and background processing with live progress tracking.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">🔒</div>
+          <h3>Secure Admin Interface</h3>
+          <p>Password-protected admin dashboard with session timeout, full CRUD for facts and clients, and a modern dark theme built for productivity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section id="benefits" class="benefits">
+    <div class="container">
+      <h2 class="section-title">Built for Content Teams</h2>
+      <p class="section-subtitle">Whether you manage content, own the product, or build the integration — Fact Hub fits your workflow.</p>
+      <div class="benefits-grid">
+        <div class="benefit-item fade-in">
+          <div class="benefit-icon">✍️</div>
+          <h3>For Content Managers</h3>
+          <p>Manage your fact library without touching code. Upload, edit, and organize facts through a polished web interface designed for efficiency.</p>
+        </div>
+        <div class="benefit-item fade-in">
+          <div class="benefit-icon">🎛️</div>
+          <h3>For Product Owners</h3>
+          <p>Control the delivery experience. Decide how and when facts reach your audience with sequential delivery and per-client progression tracking.</p>
+        </div>
+        <div class="benefit-item fade-in">
+          <div class="benefit-icon">🛠️</div>
+          <h3>For Development Teams</h3>
+          <p>Integrate in minutes with a clean REST API. Self-hosted with Ruby on Rails, SQLite storage, and zero external service dependencies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section id="cta" class="cta">
+    <div class="cta-glow"></div>
+    <div class="container">
+      <h2 class="gradient-text">Ready to manage your facts?</h2>
+      <p>Fact Hub is open source and ready to deploy. Clone the repository, run the setup, and start curating.</p>
+      <a href="https://github.com/saumon/facthub" class="btn btn-primary btn-large btn-glow">View on GitHub</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer">
+    <div class="container">
+      <p>&copy; 2026 Fact Hub. Open source under the MIT License.</p>
+    </div>
+  </footer>
+
+  <script src="./assets/app.js" defer></script>
+</body>
+</html>
